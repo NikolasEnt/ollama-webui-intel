@@ -24,10 +24,10 @@ docker compose up -d
 
 Open [http://127.0.0.1:18080](http://127.0.0.1:18080) to access Open WebUI with accelerated ollama backend.
 
-_Tip:_  For performance monitoring, including GPU utilization and power usage, `intel-gpu-top` is a useful tool:
+_Tip:_  For performance monitoring, including GPU utilization and power usage, `intel_gpu_top` is a useful tool:
 ```
 sudo apt install intel-gpu-tools
-intel-gpu-top
+sudo intel_gpu_top
 ```
 
 Alternatively, one may compile [btop++](https://github.com/aristocratos/btop) with Intel GPU support.
