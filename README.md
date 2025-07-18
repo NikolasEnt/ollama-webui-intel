@@ -41,12 +41,13 @@ In the [docker-compose.yml](docker-compose.yml) file:
 * Use memory limit feature, such as `mem_limit: "32G"`, to limit RAM used by ipex_ollama service.
 * Configure `DEVICE` variable if another hardware, such as a dedicated GPU, is used.
 * Customize `OLLAMA_NUM_GPU` if required to manage GPU offload.
-* Other Ollama varibles can be specified in `environment` section of ipex_ollama service. For example, set `OLLAMA_CONTEXT_LENGTH` to change the default model context length.
+* Other Ollama variables can be specified in the environment section of the ipex_ollama service. For example, set `OLLAMA_NUM_CTX` to change the default model context length (it is set to be 8192 by default). Please note that some variable names are different from those used for similar functions in the original Ollama.
 
 ## Advice on performance
 
 1. If using CPU inference, tuning the `num_thread` model parameter in ollama for specific tasks (given the model and context length) may improve performance.
-2. Use the `cpuset` option in `docker-compose.yml` to pin the `ipex_ollama` service to specific CPU cores. For example, use `cpuset: "0-3"` to utilize the first four CPU cores (e.g., to use only performance cores). Select the most performant value empirically.
+2. Use the `cpuset` option in `docker-compose.yml` to pin the `ipex_ollama` service to specific CPU cores. For example, use `cpuset: "0-3"` to utilize the first four CPU cores (e.g., to use performance cores only). Select the most performant value empirically.
+3. It can be a good idea to use optimised models, for example, the models optimised by [Unsloth](https://huggingface.co/unsloth) to achieve better performance (for example, Qwen3:4b with Unsloth optimisations runs 3.8% faster on an iGPU).
 
 ## Benchmarks
 
