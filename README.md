@@ -41,12 +41,13 @@ In the [docker-compose.yml](docker-compose.yml) file:
 * Use memory limit feature, such as `mem_limit: "32G"`, to limit RAM used by ipex_ollama service.
 * Configure `DEVICE` variable if another hardware, such as a dedicated GPU, is used.
 * Customize `OLLAMA_NUM_GPU` if required to manage GPU offload.
-* Other Ollama varibles can be specified in `environment` section of ipex_ollama service. For example, set `OLLAMA_CONTEXT_LENGTH` to change the default model context length.
+* Other Ollama variables can be specified in the environment section of the ipex_ollama service. For example, set `OLLAMA_NUM_CTX` to change the default model context length (it is set to be 8192 by default). Please note that some variable names are different from those used for similar functions in the original Ollama.
 
 ## Advice on performance
 
 1. If using CPU inference, tuning the `num_thread` model parameter in ollama for specific tasks (given the model and context length) may improve performance.
-2. Use the `cpuset` option in `docker-compose.yml` to pin the `ipex_ollama` service to specific CPU cores. For example, use `cpuset: "0-3"` to utilize the first four CPU cores (e.g., to use only performance cores). Select the most performant value empirically.
+2. Use the `cpuset` option in `docker-compose.yml` to pin the `ipex_ollama` service to specific CPU cores. For example, use `cpuset: "0-3"` to utilize the first four CPU cores (e.g., to use performance cores only). Select the most performant value empirically.
+3. It can be a good idea to use optimised models, for example, the models optimised by [Unsloth](https://huggingface.co/unsloth) to achieve better performance (for example, Qwen3:4b with Unsloth optimisations runs 3.8% faster on an iGPU).
 
 ## Benchmarks
 
@@ -66,6 +67,10 @@ The benchmark script is designed to be a standalone script that can be executed 
 | llama3.3:70b       | 1.16 ± 0.01          | 1.58 ± 0.00           | NA                |
 | llama3.1:70b       | 1.17 ± 0.00          | 1.57 ± 0.00           | NA                |
 | llama3.1:8b        | 9.76 ± 0.18          | 12.69 ± 0.20          | 104.31 ± 2.06     |
+| qwen3:32b          | 3.10 ± 0.24          | 2.68 ± 0.09           | 32.90 ± 1.03      |
+| qwen3:30b-a3b      | 12.83 ± 0.10         | 19.83 ± 0.54          | 121.39 ± 0.73     |
+| qwen3:8b           | 11.59 ± 0.06         | 10.67 ± 0.13          | 101.30 ± 0.73     |
+| qwen3:4b           | 16.49 ± 0.15         | 18.00 ± 0.39          | 127.23 ± 1.61     |
 | qwen2.5:72b        | 1.11 ± 0.01          | 1.24 ± 0.00           | NA                |
 | qwen2.5:32b        | 2.46 ± 0.01          | 3.44 ± 0.02           | 31.91 ± 0.34      |
 | qwen2.5:7b         | 10.26 ± 0.18         | 13.06 ± 0.09          | 101.03 ± 1.01     |
