@@ -38,10 +38,10 @@ The Docker environment is pre-configured to run on Intel iGPUs. Here are some pa
 
 In the [docker-compose.yml](docker-compose.yml) file:
 * Configure the volumes of services to set up where data and models will be stored. Prefer using disks with fast I/O.
-* Use memory limit feature, such as `mem_limit: "32G"`, to limit RAM used by ipex_ollama service.
+* Use memory limit features, such as `mem_limit: "32G"`, to limit RAM used by ipex_ollama service.
 * Configure `DEVICE` variable if another hardware, such as a dedicated GPU, is used.
 * Customize `OLLAMA_NUM_GPU` if required to manage GPU offload.
-* Other Ollama variables can be specified in the environment section of the ipex_ollama service. For example, set `OLLAMA_NUM_CTX` to change the default model context length (it is set to be 8192 by default). Please note that some variable names are different from those used for similar functions in the original Ollama.
+* Other Ollama variables can be specified in the environment section of the ipex_ollama service. For example, set `OLLAMA_NUM_CTX` to change the default model context length (it is set to be 8192 by default). Please note that some variable names are different from those used for similar purposes in the original Ollama.
 
 ## Advice on performance
 
@@ -57,7 +57,7 @@ With sufficient RAM, this SoC can handle relatively large models locally, making
 
 Feel free to explore the benchmark code and adjust it as needed for your specific experimentation and setup. The provided code is configured to produce the results below, so ensure that the required models are pulled before running the benchmark script.
 
-The benchmark script is designed to be a standalone script that can be executed from the host machine (not from inside the Docker environment). You can use this benchmark code to test any OpenAI-compatible APIs by adjusting the API_URI and specifying the required model names.
+The benchmark script is designed to be a standalone script that can be executed from the host machine (not from inside the Docker environment). One can use this benchmark code to test any OpenAI-compatible APIs by adjusting the API_URI and specifying the required model names.
 
 ### Language models
 
