@@ -33,7 +33,7 @@ services:
     command: bash -c "/llm/ollama/ollama serve > /logs/ollama.log"
   open-webui:
     container_name: open-webui
-    image: ghcr.io/open-webui/open-webui:v0.6.26
+    image: ghcr.io/open-webui/open-webui:v0.6.30
     ports:
       - 18080:8080
     extra_hosts:
