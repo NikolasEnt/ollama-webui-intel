@@ -4,7 +4,7 @@ This repository demonstrates running [Ollama](https://github.com/ollama/ollama) 
 
 ![Benchmark results](/readme_imgs/title.png)
 
-Read more about the project and benchmark results in blog post: [https://nikolasent.github.io/hardware/deeplearning/2025/02/09/iGPU-Benchmark-VLM.html](https://nikolasent.github.io/hardware/deeplearning/2025/02/09/iGPU-Benchmark-VLM.html). The results were obtained with intelanalytics/ipex-llm-inference-cpp-xpu:2.2.0-SNAPSHOT base Docker image running on Debian 12 with Kernel 6.11.5.
+Read more about the project and benchmark results in a blog post: [https://nikolasent.github.io/hardware/deeplearning/2025/02/09/iGPU-Benchmark-VLM.html](https://nikolasent.github.io/hardware/deeplearning/2025/02/09/iGPU-Benchmark-VLM.html). The results were obtained with intelanalytics/ipex-llm-inference-cpp-xpu:2.2.0-SNAPSHOT base Docker image running on Debian 12 with Kernel 6.11.5.
 
 ## Quick Start
 
@@ -12,7 +12,7 @@ Using Intel GPUs requires that you have Intel firmware installed. For example, o
 
 ```bash
 sudo apt-get install firmware-misc-nonfree firmware-intel-graphics
-sudo update-initramfs -u -k all  # Required after kernel updates as well.
+sudo update-initramfs -u -k all  # Required after Linux Kernel updates as well
 ```
 
 [Docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/) are also required.
@@ -47,7 +47,7 @@ In the [docker-compose.yml](docker-compose.yml) file:
 
 1. If using CPU inference, tuning the `num_thread` model parameter in ollama for specific tasks (given the model and context length) may improve performance.
 2. Use the `cpuset` option in `docker-compose.yml` to pin the `ipex_ollama` service to specific CPU cores. For example, use `cpuset: "0-3"` to utilize the first four CPU cores (e.g., to use performance cores only). Select the most performant value empirically.
-3. It can be a good idea to use optimised models, for example, the models optimised by [Unsloth](https://huggingface.co/unsloth) to achieve better performance (for example, Qwen3:4b with Unsloth optimisations runs 3.8% faster on an iGPU).
+3. It can be a good idea to use optimised models, for example, the models optimised by [Unsloth](https://huggingface.co/unsloth) to achieve better performance (for example, qwen3:4b with Unsloth optimisations runs 3.8% faster on an iGPU).
 
 ## Benchmarks
 
